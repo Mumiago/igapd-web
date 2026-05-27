@@ -1,0 +1,217 @@
+[
+  {
+    "id": "polomaska-6000",
+    "name": "3M™ Polomaska séria 6000",
+    "shortName": "3M™ Polomaska 6100 / 6200 / 6300",
+    "category": "Ochrana dýchacích orgánov",
+    "price": 26.07,
+    "priceNote": "od",
+    "img": "images/polomaska-6000.webp",
+    "url": "produkt.html?id=polomaska-6000",
+    "sku": "6100,6200,6300",
+    "stock": null,
+    "active": true,
+    "tags": [
+      "polomaska",
+      "respirátor",
+      "séria 6000"
+    ],
+    "variants": [
+      {
+        "label": "S – Small",
+        "sku": "6100",
+        "price": 26.07,
+        "upc": "04046719375899",
+        "catalogNum": "6100",
+        "stockNum": "7000146846",
+        "stock": null
+      },
+      {
+        "label": "M – Medium",
+        "sku": "6200",
+        "price": 26.07,
+        "upc": "04046719375912",
+        "catalogNum": "6200",
+        "stockNum": "7000146847",
+        "stock": null
+      },
+      {
+        "label": "L – Large",
+        "sku": "6300",
+        "price": 26.07,
+        "upc": "04046719375929",
+        "catalogNum": "6300",
+        "stockNum": "7000146848",
+        "stock": null
+      }
+    ],
+    "description": "3M™ polomasky série 6000 sú ekonomické, nenáročné na údržbu, jednoduché na použitie a majú veľmi nízku hmotnosť. Všetky masky majú 3M™ bajonetový upínací systém filtrov, ktorý umožňuje pripojenie širokého sortimentu filtrov na ochranu voči plynom, výparom a časticiam. Môžu byť použité s 3M™ systémami na prívod vzduchu pre špecifické pracovné prostredia. Dostupné vo veľkostiach S (6100), M (6200) a L (6300).",
+    "features": [
+      "Hlavové popruhy a remienok na krk s jednoduchým zapínaním pre pohodlné nosenie",
+      "Elastomerický materiál s nízkou hmotnosťou pre pohodlie aj počas dlhých pracovných zmien",
+      "Nízky profil nenarúša zorné pole",
+      "Konštrukcia s dvoma filtrami poskytuje nízky odpor pri dýchaní",
+      "Flexibilný systém na filtre proti plynom, výparom a časticiam",
+      "Bajonetový systém umožňuje pripojenie širokého sortimentu filtrov",
+      "Kompatibilná s filtrami sérii 3M™ 2000, 5000 a 6000",
+      "Použiteľná so systémami na prívod vzduchu 3M™",
+      "Dostupná vo veľkostiach S, M, L"
+    ],
+    "specs": [
+      {
+        "k": "Typ produktu",
+        "v": "Polomaska"
+      },
+      {
+        "k": "Produktová séria",
+        "v": "Séria 6000"
+      },
+      {
+        "k": "Materiál",
+        "v": "Termoplastický elastomér (TPE)"
+      },
+      {
+        "k": "Upínací systém",
+        "v": "4-bodový"
+      },
+      {
+        "k": "Typ pripojenia",
+        "v": "Bajonetový"
+      },
+      {
+        "k": "Hmotnosť",
+        "v": "82 g"
+      },
+      {
+        "k": "Množstvo v balení",
+        "v": "8 ks"
+      },
+      {
+        "k": "Splnené normy",
+        "v": "EN 140:1998"
+      },
+      {
+        "k": "Doba platnosti",
+        "v": "1825 dní"
+      },
+      {
+        "k": "Predajná jednotka",
+        "v": "ks"
+      }
+    ],
+    "applications": [
+      "Maľovanie sprejom",
+      "Stavebníctvo",
+      "Poľnohospodárstvo"
+    ]
+  },
+  {
+    "id": "celotvarova-6000",
+    "name": "3M™ Celotvárová maska séria 6000",
+    "shortName": "3M™ Celotvárová maska 6700 / 6800 / 6900",
+    "category": "Ochrana dýchacích orgánov",
+    "price": 173.38,
+    "priceNote": "",
+    "img": "images/celotvarova-6000.avif",
+    "url": "produkt.html?id=celotvarova-6000",
+    "sku": "6700,6800,6900",
+    "stock": null,
+    "active": true,
+    "tags": [
+      "celotvárová maska",
+      "séria 6000"
+    ],
+    "variants": [
+      {
+        "label": "S – Small",
+        "sku": "6700",
+        "price": 173.38,
+        "upc": "04046719375929",
+        "catalogNum": "6700",
+        "stockNum": "7100015050",
+        "stock": null
+      },
+      {
+        "label": "M – Medium",
+        "sku": "6800",
+        "price": 173.38,
+        "upc": "04046719375912",
+        "catalogNum": "6800",
+        "stockNum": "7100015051",
+        "stock": null
+      },
+      {
+        "label": "L – Large",
+        "sku": "6900",
+        "price": 173.38,
+        "upc": "04046719719846",
+        "catalogNum": "6900",
+        "stockNum": "7100015052",
+        "stock": null
+      }
+    ],
+    "description": "3M™ celotvárová maska pre viacnásobné použitie je určená na použitie s 3M™ filtrami série 2000 a 6000, ktoré poskytujú filtračnú ochranu proti pevným časticiam, plynom a výparom v rôznych priemyselných prostrediach. Výdychový ventil poskytuje vylepšenú odolnosť a jednoduché čistenie. Dostupné vo veľkostiach S (6700), M (6800) a L (6900).",
+    "features": [
+      "Bajonetový upínací systém pre rôzne typy filtrov — plyny, výpary aj pevné častice",
+      "Mäkká hypoalergénna tvárová časť pre dlhodobé nosenie",
+      "Výnimočne nízka hmotnosť (400 g) pre vylepšené pohodlie",
+      "Celotvárový priezor so širokým zorným poľom, odolný proti poškriabaniu a nárazu (EN166:2001 B)",
+      "Vyvážený štvorbodový upínací systém pre jednoduché a bezpečné nasadenie",
+      "Použiteľná so systémami pohoneného a privedeného vzduchu 3M™ (TR-600, TR-800, S200+)",
+      "Dostupná vo veľkostiach S (6700), M (6800) a L (6900)",
+      "Kompatibilná s filtrami sérii 3M™ 2000 a 6000"
+    ],
+    "specs": [
+      {
+        "k": "Typ produktu",
+        "v": "Celotvárová maska"
+      },
+      {
+        "k": "Produktová séria",
+        "v": "Séria 6000"
+      },
+      {
+        "k": "Upínací systém",
+        "v": "4-bodový"
+      },
+      {
+        "k": "Typ pripojenia",
+        "v": "Bajonetový"
+      },
+      {
+        "k": "Hmotnosť",
+        "v": "400 g"
+      },
+      {
+        "k": "Množstvo v balení",
+        "v": "4 ks"
+      },
+      {
+        "k": "Predajná jednotka",
+        "v": "ks"
+      },
+      {
+        "k": "Doba platnosti",
+        "v": "1825 dní"
+      },
+      {
+        "k": "Typ ochrany",
+        "v": "Ochrana dýchacích ciest"
+      },
+      {
+        "k": "Normy",
+        "v": "EN166:2001 B"
+      }
+    ],
+    "applications": [
+      "Zváranie",
+      "Brúsenie",
+      "Lakovanie",
+      "Laboratóriá",
+      "Manipulácia s chemikáliami",
+      "Obrábanie",
+      "Rezanie",
+      "Stavebníctvo"
+    ]
+  }
+]

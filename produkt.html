@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Produkt – IGAPD Prievidza</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { primary: "#cc0000", "primary-dark": "#a00000" },
+        fontFamily: { sans: ["Inter", "sans-serif"] }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    display: inline-block; line-height: 1;
+    text-transform: none; letter-spacing: normal;
+  }
+  .tab-active { border-bottom: 3px solid #cc0000; color: #cc0000; }
+  .stock-ok   { background:#dcfce7; color:#166534; }
+  .stock-low  { background:#fef9c3; color:#854d0e; }
+  .stock-out  { background:#fee2e2; color:#991b1b; }
+  .stock-na   { background:#f4f4f5; color:#71717a; }
+</style>
+</head>
+<body class="bg-white text-zinc-900 font-sans">
+
+<!-- HEADER -->
+<header class="sticky top-0 w-full z-50 bg-white border-b border-zinc-200 shadow-sm">
+  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <a href="index.html"><img src="images/logo.png" alt="IGAPD logo" style="height:48px;"/></a>
+    <nav class="hidden md:flex gap-8">
+      <a href="index.html" class="text-sm font-bold uppercase tracking-tight text-zinc-900 hover:text-primary transition-colors">Domov</a>
+      <a href="produkty.html" class="text-sm font-bold uppercase tracking-tight text-primary border-b-2 border-primary pb-0.5">Produkty</a>
+      <a href="o-nas.html" class="text-sm font-bold uppercase tracking-tight text-zinc-900 hover:text-primary transition-colors">O nás</a>
+      <a href="kontakt.html" class="text-sm font-bold uppercase tracking-tight text-zinc-900 hover:text-primary transition-colors">Kontakt</a>
+    </nav>
+    <a href="kontakt.html" class="hidden md:flex items-center gap-2 bg-primary hover:bg-primary-dark text-white text-sm font-bold uppercase tracking-tight px-5 py-2.5 transition-colors">
+      <span class="material-symbols-outlined text-base">phone</span> Kontaktujte nás
+    </a>
+    <button id="menuBtn" class="md:hidden material-symbols-outlined text-zinc-700">menu</button>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-zinc-200 px-6 py-4 flex flex-col gap-4">
+    <a href="index.html" class="text-sm font-bold uppercase text-zinc-900">Domov</a>
+    <a href="produkty.html" class="text-sm font-bold uppercase text-primary">Produkty</a>
+    <a href="o-nas.html" class="text-sm font-bold uppercase text-zinc-900">O nás</a>
+    <a href="kontakt.html" class="text-sm font-bold uppercase text-zinc-900">Kontakt</a>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="bg-zinc-50 border-b border-zinc-200">
+  <div class="max-w-7xl mx-auto px-6 py-3 flex items-center gap-2 text-xs text-zinc-400">
+    <a href="index.html" class="hover:text-primary transition-colors">Domov</a>
+    <span class="material-symbols-outlined text-xs">chevron_right</span>
+    <a href="produkty.html" class="hover:text-primary transition-colors">Produkty</a>
+    <span class="material-symbols-outlined text-xs">chevron_right</span>
+    <span id="breadcrumb-cat" class="hover:text-primary transition-colors cursor-pointer"></span>
+    <span class="material-symbols-outlined text-xs">chevron_right</span>
+    <span id="breadcrumb-name" class="text-zinc-600 font-bold"></span>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div id="loading" class="max-w-7xl mx-auto px-6 py-24 text-center text-zinc-400">
+  <span class="material-symbols-outlined text-5xl mb-4 block">hourglass_empty</span>
+  Načítavam produkt...
+</div>
+
+<!-- PRODUCT (hidden until loaded) -->
+<div id="product-page" class="hidden">
+
+  <!-- MAIN -->
+  <section class="max-w-7xl mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+      <!-- Obrázok -->
+      <div class="lg:sticky lg:top-28">
+        <div class="bg-zinc-50 border border-zinc-200 flex items-center justify-center p-12" style="aspect-ratio:1/1">
+          <img id="product-img" src="" alt=""
+            class="w-full h-full object-contain"
+            onerror="this.style.display='none'; document.getElementById('img-placeholder').style.display='flex'"/>
+          <div id="img-placeholder" style="display:none"
+            class="w-full h-full flex flex-col items-center justify-center text-zinc-300 gap-3">
+            <span class="material-symbols-outlined text-6xl">image_not_supported</span>
+            <span class="text-sm">Obrázok bude doplnený</span>
+          </div>
+        </div>
+        <p id="product-img-caption" class="text-xs text-zinc-400 text-center mt-3"></p>
+      </div>
+
+      <!-- Info -->
+      <div class="flex flex-col gap-7">
+
+        <div>
+          <span id="product-series" class="text-xs font-bold uppercase tracking-widest text-primary mb-2 block"></span>
+          <h1 id="product-title" class="text-3xl font-black mb-2"></h1>
+          <p class="text-zinc-500 text-sm">Veľkosť: <span id="size-label" class="font-bold text-zinc-900"></span></p>
+        </div>
+
+        <!-- Cena + zásoby -->
+        <div class="flex items-center gap-6 flex-wrap">
+          <div class="flex items-end gap-2">
+            <span id="price-display" class="text-4xl font-black text-zinc-900"></span>
+            <span class="text-sm text-zinc-400 mb-1">bez DPH / ks</span>
+          </div>
+          <span id="stock-badge" class="hidden text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-full"></span>
+        </div>
+
+        <!-- Varianty -->
+        <div id="variants-section">
+          <p class="text-xs font-bold uppercase tracking-wide text-zinc-500 mb-3">Vyberte veľkosť</p>
+          <div id="variants-container" class="flex gap-3 flex-wrap"></div>
+        </div>
+
+        <!-- Kódy -->
+        <div class="bg-zinc-50 border border-zinc-200 p-4 grid grid-cols-2 gap-3 text-sm">
+          <div>
+            <p class="text-xs text-zinc-400 uppercase tracking-wide font-bold mb-0.5">3M Katalógové č.</p>
+            <p id="cat-num" class="font-bold text-zinc-900"></p>
+          </div>
+          <div>
+            <p class="text-xs text-zinc-400 uppercase tracking-wide font-bold mb-0.5">3M Skladové č.</p>
+            <p id="stock-num" class="font-bold text-zinc-900"></p>
+          </div>
+          <div class="col-span-2">
+            <p class="text-xs text-zinc-400 uppercase tracking-wide font-bold mb-0.5">UPC</p>
+            <p id="upc-num" class="font-bold text-zinc-900"></p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="tel:0905625770"
+            class="flex-1 flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold uppercase tracking-wide py-4 px-6 transition-colors">
+            <span class="material-symbols-outlined">phone</span> Mám záujem
+          </a>
+          <a id="email-cta" href="mailto:igapd@igapd.sk"
+            class="flex-1 flex items-center justify-center gap-2 border-2 border-zinc-300 hover:border-primary text-zinc-700 hover:text-primary font-bold uppercase tracking-wide py-4 px-6 transition-colors">
+            <span class="material-symbols-outlined">mail</span> Napísať dopyt
+          </a>
+        </div>
+
+        <p class="text-xs text-zinc-400">Cena je orientačná a bez DPH. Pre firmy a obchodníkov ponúkame flexibilné cenové podmienky.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL TABS -->
+  <section class="max-w-7xl mx-auto px-6 pb-16">
+    <div class="border-b border-zinc-200 flex gap-0 mb-8">
+      <button onclick="showTab('popis')" id="tab-popis"
+        class="detail-tab tab-active px-6 py-4 text-sm font-bold uppercase tracking-wide transition-colors">Popis</button>
+      <button onclick="showTab('vlastnosti')" id="tab-vlastnosti"
+        class="detail-tab px-6 py-4 text-sm font-bold uppercase tracking-wide text-zinc-500 hover:text-zinc-900 transition-colors">Vlastnosti</button>
+      <button onclick="showTab('parametre')" id="tab-parametre"
+        class="detail-tab px-6 py-4 text-sm font-bold uppercase tracking-wide text-zinc-500 hover:text-zinc-900 transition-colors">Technické parametre</button>
+    </div>
+
+    <div id="panel-popis" class="detail-panel max-w-3xl">
+      <p id="description-text" class="text-zinc-700 leading-relaxed mb-6"></p>
+      <div id="applications-section">
+        <p class="text-xs font-bold uppercase tracking-wide text-zinc-500 mb-3">Odporúčané aplikácie</p>
+        <div id="applications-container" class="flex flex-wrap gap-2"></div>
+      </div>
+    </div>
+
+    <div id="panel-vlastnosti" class="detail-panel hidden">
+      <ul id="features-list" class="flex flex-col gap-3 max-w-2xl"></ul>
+    </div>
+
+    <div id="panel-parametre" class="detail-panel hidden">
+      <div class="max-w-2xl border border-zinc-200 overflow-hidden">
+        <table class="w-full">
+          <tbody id="specs-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end #product-page -->
+
+<!-- NOT FOUND -->
+<div id="not-found" class="hidden max-w-7xl mx-auto px-6 py-24 text-center">
+  <span class="material-symbols-outlined text-5xl text-zinc-300 mb-4 block">search_off</span>
+  <p class="text-xl font-bold text-zinc-500 mb-2">Produkt nenájdený</p>
+  <a href="produkty.html" class="inline-flex items-center gap-2 text-primary font-bold hover:underline">
+    <span class="material-symbols-outlined text-base">arrow_back</span> Späť na produkty
+  </a>
+</div>
+
+<!-- CTA BANNER -->
+<section id="cta-banner" class="hidden max-w-7xl mx-auto px-6 pb-16">
+  <div class="bg-primary text-white p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div>
+      <h2 class="text-xl md:text-2xl font-black mb-1">Máte záujem o produkt?</h2>
+      <p class="text-red-100 text-sm">Ceny sú orientačné. Kontaktujte nás pre individuálnu cenovú ponuku.</p>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-4 shrink-0">
+      <a href="tel:0905625770" class="bg-white text-primary font-bold uppercase tracking-wide px-6 py-3 hover:bg-zinc-100 transition-colors flex items-center gap-2 justify-center text-sm">
+        <span class="material-symbols-outlined text-base">phone</span> 0905 625 770
+      </a>
+      <a href="mailto:igapd@igapd.sk" class="border-2 border-white text-white font-bold uppercase tracking-wide px-6 py-3 hover:bg-white hover:text-primary transition-colors flex items-center gap-2 justify-center text-sm">
+        <span class="material-symbols-outlined text-base">mail</span> igapd@igapd.sk
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-zinc-900 text-white">
+  <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div>
+      <img src="images/logo.png" alt="IGAPD logo" style="height:48px;"/>
+      <p class="text-zinc-400 text-sm mt-4">Zváracia technika a ochranné pomôcky.<br/>Autorizovaný predajca 3M.</p>
+    </div>
+    <div>
+      <h4 class="font-bold uppercase tracking-wide text-sm mb-4">Navigácia</h4>
+      <ul class="flex flex-col gap-2 text-sm text-zinc-400">
+        <li><a href="index.html" class="hover:text-white transition-colors">Domov</a></li>
+        <li><a href="produkty.html" class="hover:text-white transition-colors">Produkty</a></li>
+        <li><a href="o-nas.html" class="hover:text-white transition-colors">O nás</a></li>
+        <li><a href="kontakt.html" class="hover:text-white transition-colors">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-bold uppercase tracking-wide text-sm mb-4">Kontakt</h4>
+      <ul class="flex flex-col gap-3 text-sm text-zinc-400">
+        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base mt-0.5">location_on</span> Necpalská cesta 22,<br/>971 01 Prievidza</li>
+        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">phone</span> <a href="tel:0905625770" class="hover:text-white transition-colors">0905 625 770</a></li>
+        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">mail</span> <a href="mailto:igapd@igapd.sk" class="hover:text-white transition-colors">igapd@igapd.sk</a></li>
+        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">schedule</span> Po–Pi: 8:00–17:00</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-zinc-800 text-center py-4 text-xs text-zinc-500">
+    © 2024 IGAPD. Všetky práva vyhradené.
+  </div>
+</footer>
+
+<script>
+  // ── Helpers ──────────────────────────────────────────────
+  document.getElementById("menuBtn").addEventListener("click", () => {
+    document.getElementById("mobileMenu").classList.toggle("hidden");
+  });
+
+  function showTab(tab) {
+    document.querySelectorAll(".detail-panel").forEach(p => p.classList.add("hidden"));
+    document.querySelectorAll(".detail-tab").forEach(t => {
+      t.classList.remove("tab-active", "text-primary");
+      t.classList.add("text-zinc-500");
+    });
+    document.getElementById("panel-" + tab).classList.remove("hidden");
+    const btn = document.getElementById("tab-" + tab);
+    btn.classList.add("tab-active", "text-primary");
+    btn.classList.remove("text-zinc-500");
+  }
+
+  function stockBadge(stock) {
+    if (stock === null || stock === undefined) return { cls: "stock-na",  text: "Zásoby na vyžiadanie" };
+    if (stock === 0)   return { cls: "stock-out", text: "Vypredané" };
+    if (stock <= 5)    return { cls: "stock-low", text: `Posledné kusy (${stock} ks)` };
+    return               { cls: "stock-ok",  text: `Skladom (${stock} ks)` };
+  }
+
+  function updateVariant(variant) {
+    document.getElementById("size-label").textContent  = variant.label;
+    document.getElementById("cat-num").textContent     = variant.catalogNum;
+    document.getElementById("stock-num").textContent   = variant.stockNum;
+    document.getElementById("upc-num").textContent     = variant.upc;
+    document.getElementById("price-display").textContent =
+      parseFloat(variant.price).toLocaleString("sk-SK", { minimumFractionDigits: 2 }) + " €";
+
+    const badge = stockBadge(variant.stock);
+    const el = document.getElementById("stock-badge");
+    el.className = "text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-full " + badge.cls;
+    el.textContent = badge.text;
+    el.classList.remove("hidden");
+
+    // highlight active variant button
+    document.querySelectorAll(".variant-btn").forEach(btn => {
+      const isActive = btn.dataset.sku === variant.sku;
+      btn.classList.toggle("border-primary",   isActive);
+      btn.classList.toggle("text-primary",     isActive);
+      btn.classList.toggle("bg-red-50",        isActive);
+      btn.classList.toggle("border-zinc-200",  !isActive);
+      btn.classList.toggle("text-zinc-700",    !isActive);
+    });
+  }
+
+  // ── Load product ─────────────────────────────────────────
+  const params  = new URLSearchParams(window.location.search);
+  const id      = params.get("id");
+
+  fetch("produkty.json")
+    .then(r => r.json())
+    .then(products => {
+      const p = products.find(x => x.id === id);
+      if (!p) {
+        document.getElementById("loading").classList.add("hidden");
+        document.getElementById("not-found").classList.remove("hidden");
+        return;
+      }
+
+      // Page title
+      document.title = p.name + " – IGAPD Prievidza";
+
+      // Breadcrumb
+      document.getElementById("breadcrumb-cat").textContent  = p.category;
+      document.getElementById("breadcrumb-name").textContent = p.name;
+
+      // Image
+      const imgEl = document.getElementById("product-img");
+      imgEl.src = p.img;
+      imgEl.alt = p.name;
+      document.getElementById("product-img-caption").textContent = p.name;
+
+      // Series label
+      document.getElementById("product-series").textContent =
+        p.name + " · " + p.category;
+
+      // Email CTA subject
+      document.getElementById("email-cta").href =
+        "mailto:igapd@igapd.sk?subject=Dopyt: " + encodeURIComponent(p.name);
+
+      // Variants
+      const varContainer = document.getElementById("variants-container");
+      if (p.variants && p.variants.length > 0) {
+        p.variants.forEach((v, i) => {
+          const btn = document.createElement("button");
+          btn.className = "variant-btn flex flex-col items-center justify-center border-2 border-zinc-200 text-zinc-700 hover:border-primary hover:text-primary px-5 py-3 transition-all font-bold text-sm";
+          btn.dataset.sku = v.sku;
+          btn.innerHTML = `<span class="text-lg font-black">${v.sku}</span><span class="text-xs font-normal">${v.label}</span>`;
+          btn.addEventListener("click", () => updateVariant(v));
+          varContainer.appendChild(btn);
+        });
+        // default: select middle variant
+        const defaultIdx = Math.floor(p.variants.length / 2);
+        updateVariant(p.variants[defaultIdx]);
+        document.getElementById("product-title").textContent =
+          p.name.replace("séria", p.variants[defaultIdx].sku);
+      } else {
+        document.getElementById("variants-section").classList.add("hidden");
+        document.getElementById("product-title").textContent = p.name;
+        const badge = stockBadge(p.stock);
+        const el = document.getElementById("stock-badge");
+        el.className = "text-xs font-bold uppercase tracking-wide px-3 py-1.5 rounded-full " + badge.cls;
+        el.textContent = badge.text;
+        el.classList.remove("hidden");
+        document.getElementById("price-display").textContent =
+          (p.priceNote ? p.priceNote + " " : "") +
+          parseFloat(p.price).toLocaleString("sk-SK", { minimumFractionDigits: 2 }) + " €";
+      }
+
+      // Description
+      document.getElementById("description-text").textContent = p.description || "";
+
+      // Applications
+      const appContainer = document.getElementById("applications-container");
+      if (p.applications && p.applications.length > 0) {
+        p.applications.forEach(a => {
+          const span = document.createElement("span");
+          span.className = "bg-zinc-100 text-zinc-700 text-xs font-bold uppercase tracking-wide px-3 py-1.5";
+          span.textContent = a;
+          appContainer.appendChild(span);
+        });
+      } else {
+        document.getElementById("applications-section").classList.add("hidden");
+      }
+
+      // Features
+      const featList = document.getElementById("features-list");
+      (p.features || []).forEach(f => {
+        const li = document.createElement("li");
+        li.className = "flex items-start gap-3 text-sm text-zinc-700";
+        li.innerHTML = `<span class="material-symbols-outlined text-primary text-base mt-0.5 shrink-0">check_circle</span>${f}`;
+        featList.appendChild(li);
+      });
+
+      // Specs
+      const tbody = document.getElementById("specs-tbody");
+      (p.specs || []).forEach((s, i) => {
+        const tr = document.createElement("tr");
+        tr.className = i % 2 === 0 ? "bg-zinc-50" : "bg-white";
+        tr.innerHTML = `<td class="py-3 px-4 text-sm font-bold text-zinc-600 w-1/2">${s.k}</td><td class="py-3 px-4 text-sm text-zinc-800">${s.v}</td>`;
+        tbody.appendChild(tr);
+      });
+
+      // Show page
+      document.getElementById("loading").classList.add("hidden");
+      document.getElementById("product-page").classList.remove("hidden");
+      document.getElementById("cta-banner").classList.remove("hidden");
+    })
+    .catch(() => {
+      document.getElementById("loading").classList.add("hidden");
+      document.getElementById("not-found").classList.remove("hidden");
+    });
+</script>
+</body>
+</html>

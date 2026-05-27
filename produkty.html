@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Produkty – IGAPD Prievidza</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { primary: "#cc0000", "primary-dark": "#a00000" },
+        fontFamily: { sans: ["Inter", "sans-serif"] }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    display: inline-block; line-height: 1;
+    text-transform: none; letter-spacing: normal;
+  }
+</style>
+</head>
+<body class="bg-white text-zinc-900 font-sans">
+
+<!-- HEADER -->
+<header class="sticky top-0 w-full z-50 bg-white border-b border-zinc-200 shadow-sm">
+  <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <a href="index.html"><img src="images/logo.png" alt="IGAPD logo" style="height:48px;" /></a>
+    <nav class="hidden md:flex gap-8">
+      <a href="index.html" class="text-sm font-bold uppercase tracking-tight text-zinc-900 hover:text-primary transition-colors">Domov</a>
+      <a href="produkty.html" class="text-sm font-bold uppercase tracking-tight text-primary border-b-2 border-primary pb-0.5">Produkty</a>
+      <a href="o-nas.html" class="text-sm font-bold uppercase tracking-tight text-zinc-900 hover:text-primary transition-colors">O nás</a>
+      <a href="kontakt.html" class="text-sm font-bold uppercase tracking-tight text-zinc-900 hover:text-primary transition-colors">Kontakt</a>
+    </nav>
+    <a href="kontakt.html" class="hidden md:flex items-center gap-2 bg-primary hover:bg-primary-dark text-white text-sm font-bold uppercase tracking-tight px-5 py-2.5 transition-colors">
+      <span class="material-symbols-outlined text-base">phone</span> Kontaktujte nás
+    </a>
+    <button id="menuBtn" class="md:hidden material-symbols-outlined text-zinc-700">menu</button>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-zinc-200 px-6 py-4 flex flex-col gap-4">
+    <a href="index.html" class="text-sm font-bold uppercase text-zinc-900">Domov</a>
+    <a href="produkty.html" class="text-sm font-bold uppercase text-primary">Produkty</a>
+    <a href="o-nas.html" class="text-sm font-bold uppercase text-zinc-900">O nás</a>
+    <a href="kontakt.html" class="text-sm font-bold uppercase text-zinc-900">Kontakt</a>
+  </div>
+</header>
+
+<!-- PAGE TITLE -->
+<div class="bg-zinc-900 text-white">
+  <div class="max-w-7xl mx-auto px-6 py-12">
+    <span class="text-xs font-bold uppercase tracking-widest text-primary mb-2 block">Autorizovaný predajca 3M</span>
+    <h1 class="text-4xl font-black">Ochranné pomôcky</h1>
+    <p class="text-zinc-400 mt-2">Ceny sú bez DPH a sú orientačné. Pre cenovú ponuku nás kontaktujte.</p>
+  </div>
+</div>
+
+<!-- TABS + CONTENT -->
+<section class="max-w-7xl mx-auto px-6 py-12">
+  <div class="flex flex-wrap gap-2 mb-8 border-b border-zinc-200 pb-4">
+    
+    <button onclick="showCat('ochrana_zraku')" id="tab-ochrana_zraku" data-cat="ochrana_zraku"
+      class="tab-btn flex items-center gap-2 px-4 py-3 text-sm font-bold uppercase tracking-wide transition-colors bg-zinc-100 text-zinc-700 hover:bg-zinc-200">
+      <span class="material-symbols-outlined text-sm">visibility</span>
+      <span>Ochrana zraku</span>
+    </button>
+    <button onclick="showCat('ochrana_sluchu')" id="tab-ochrana_sluchu" data-cat="ochrana_sluchu"
+      class="tab-btn flex items-center gap-2 px-4 py-3 text-sm font-bold uppercase tracking-wide transition-colors bg-zinc-100 text-zinc-700 hover:bg-zinc-200">
+      <span class="material-symbols-outlined text-sm">hearing</span>
+      <span>Ochrana sluchu</span>
+    </button>
+    <button onclick="showCat('ochrana_dychania')" id="tab-ochrana_dychania" data-cat="ochrana_dychania"
+      class="tab-btn flex items-center gap-2 px-4 py-3 text-sm font-bold uppercase tracking-wide transition-colors bg-primary text-white">
+      <span class="material-symbols-outlined text-sm">air</span>
+      <span>Ochrana dýchacích orgánov</span>
+    </button>
+    <button onclick="showCat('prisl_filtrovent')" id="tab-prisl_filtrovent" data-cat="prisl_filtrovent"
+      class="tab-btn flex items-center gap-2 px-4 py-3 text-sm font-bold uppercase tracking-wide transition-colors bg-zinc-100 text-zinc-700 hover:bg-zinc-200">
+      <span class="material-symbols-outlined text-sm">tune</span>
+      <span>Príslušenstvo k filtroventilácii</span>
+    </button>
+    <button onclick="showCat('zvaracie_kukly')" id="tab-zvaracie_kukly" data-cat="zvaracie_kukly"
+      class="tab-btn flex items-center gap-2 px-4 py-3 text-sm font-bold uppercase tracking-wide transition-colors bg-zinc-100 text-zinc-700 hover:bg-zinc-200">
+      <span class="material-symbols-outlined text-sm">shield</span>
+      <span>Zváracie kukly</span>
+    </button>
+  </div>
+  <div>
+    
+    <div id="panel-ochrana_zraku" class="cat-panel" style="display:none">
+      
+      <div class="flex flex-col items-center justify-center py-24 text-center">
+        <span class="material-symbols-outlined text-5xl text-zinc-200 mb-4">visibility</span>
+        <p class="text-zinc-400 font-bold text-lg mb-1">Ochrana zraku</p>
+        <p class="text-zinc-400 text-sm">Produkty pripravujeme. Kontaktujte nás pre viac informácií.</p>
+        <a href="kontakt.html" class="mt-6 inline-flex items-center gap-2 bg-primary text-white text-sm font-bold uppercase tracking-wide px-6 py-3 hover:bg-red-800 transition-colors">
+          <span class="material-symbols-outlined text-base">phone</span> Kontaktujte nás
+        </a>
+      </div>
+    </div>
+    <div id="panel-ochrana_sluchu" class="cat-panel" style="display:none">
+      
+      <div class="flex flex-col items-center justify-center py-24 text-center">
+        <span class="material-symbols-outlined text-5xl text-zinc-200 mb-4">hearing</span>
+        <p class="text-zinc-400 font-bold text-lg mb-1">Ochrana sluchu</p>
+        <p class="text-zinc-400 text-sm">Produkty pripravujeme. Kontaktujte nás pre viac informácií.</p>
+        <a href="kontakt.html" class="mt-6 inline-flex items-center gap-2 bg-primary text-white text-sm font-bold uppercase tracking-wide px-6 py-3 hover:bg-red-800 transition-colors">
+          <span class="material-symbols-outlined text-base">phone</span> Kontaktujte nás
+        </a>
+      </div>
+    </div>
+    <div id="panel-ochrana_dychania" class="cat-panel" style="display:block">
+      
+      <div id="product-table-container">
+        <div class="mb-6 flex items-center justify-between">
+          <p class="text-zinc-500 text-sm">Kliknite na produkt pre zobrazenie detailov.</p>
+          <p class="text-xs text-zinc-400" id="product-count"></p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="border-b-2 border-zinc-200">
+                <th class="text-left py-3 pr-4 text-xs font-bold uppercase tracking-wide text-zinc-500">Produkt</th>
+                <th class="text-right py-3 text-xs font-bold uppercase tracking-wide text-zinc-500">Cena bez DPH</th>
+              </tr>
+            </thead>
+            <tbody id="product-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div id="panel-prisl_filtrovent" class="cat-panel" style="display:none">
+      
+      <div class="flex flex-col items-center justify-center py-24 text-center">
+        <span class="material-symbols-outlined text-5xl text-zinc-200 mb-4">tune</span>
+        <p class="text-zinc-400 font-bold text-lg mb-1">Príslušenstvo k filtroventilácii</p>
+        <p class="text-zinc-400 text-sm">Produkty pripravujeme. Kontaktujte nás pre viac informácií.</p>
+        <a href="kontakt.html" class="mt-6 inline-flex items-center gap-2 bg-primary text-white text-sm font-bold uppercase tracking-wide px-6 py-3 hover:bg-red-800 transition-colors">
+          <span class="material-symbols-outlined text-base">phone</span> Kontaktujte nás
+        </a>
+      </div>
+    </div>
+    <div id="panel-zvaracie_kukly" class="cat-panel" style="display:none">
+      
+      <div class="flex flex-col items-center justify-center py-24 text-center">
+        <span class="material-symbols-outlined text-5xl text-zinc-200 mb-4">shield</span>
+        <p class="text-zinc-400 font-bold text-lg mb-1">Zváracie kukly</p>
+        <p class="text-zinc-400 text-sm">Produkty pripravujeme. Kontaktujte nás pre viac informácií.</p>
+        <a href="kontakt.html" class="mt-6 inline-flex items-center gap-2 bg-primary text-white text-sm font-bold uppercase tracking-wide px-6 py-3 hover:bg-red-800 transition-colors">
+          <span class="material-symbols-outlined text-base">phone</span> Kontaktujte nás
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="max-w-7xl mx-auto px-6 pb-16">
+  <div class="bg-primary text-white p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div>
+      <h2 class="text-xl md:text-2xl font-black mb-1">Máte záujem o produkt?</h2>
+      <p class="text-red-100 text-sm">Ceny sú orientačné. Kontaktujte nás pre individuálnu cenovú ponuku.</p>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-4 shrink-0">
+      <a href="tel:0905625770" class="bg-white text-primary font-bold uppercase tracking-wide px-6 py-3 hover:bg-zinc-100 transition-colors flex items-center gap-2 justify-center text-sm">
+        <span class="material-symbols-outlined text-base">phone</span> 0905 625 770
+      </a>
+      <a href="mailto:igapd@igapd.sk" class="border-2 border-white text-white font-bold uppercase tracking-wide px-6 py-3 hover:bg-white hover:text-primary transition-colors flex items-center gap-2 justify-center text-sm">
+        <span class="material-symbols-outlined text-base">mail</span> igapd@igapd.sk
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-zinc-900 text-white">
+  <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div>
+      <img src="images/logo.png" alt="IGAPD logo" style="height:48px;" />
+      <p class="text-zinc-400 text-sm mt-4">Zváracia technika a ochranné pomôcky.<br/>Autorizovaný predajca 3M.</p>
+    </div>
+    <div>
+      <h4 class="font-bold uppercase tracking-wide text-sm mb-4">Navigácia</h4>
+      <ul class="flex flex-col gap-2 text-sm text-zinc-400">
+        <li><a href="index.html" class="hover:text-white transition-colors">Domov</a></li>
+        <li><a href="produkty.html" class="hover:text-white transition-colors">Produkty</a></li>
+        <li><a href="o-nas.html" class="hover:text-white transition-colors">O nás</a></li>
+        <li><a href="kontakt.html" class="hover:text-white transition-colors">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-bold uppercase tracking-wide text-sm mb-4">Kontakt</h4>
+      <ul class="flex flex-col gap-3 text-sm text-zinc-400">
+        <li class="flex items-start gap-2"><span class="material-symbols-outlined text-primary text-base mt-0.5">location_on</span> Necpalská cesta 22,<br/>971 01 Prievidza</li>
+        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">phone</span> <a href="tel:0905625770" class="hover:text-white transition-colors">0905 625 770</a></li>
+        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">mail</span> <a href="mailto:igapd@igapd.sk" class="hover:text-white transition-colors">igapd@igapd.sk</a></li>
+        <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-base">schedule</span> Po–Pi: 8:00–17:00</li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-zinc-800 text-center py-4 text-xs text-zinc-500">
+    © 2024 IGAPD. Všetky práva vyhradené.
+  </div>
+</footer>
+
+<script>
+  document.getElementById("menuBtn").addEventListener("click", () => {
+    document.getElementById("mobileMenu").classList.toggle("hidden");
+  });
+
+  function showCat(cat) {
+    document.querySelectorAll(".cat-panel").forEach(p => p.style.display = "none");
+    document.getElementById("panel-" + cat).style.display = "block";
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      if (btn.dataset.cat === cat) {
+        btn.classList.remove("bg-zinc-100","text-zinc-700","hover:bg-zinc-200");
+        btn.classList.add("bg-primary","text-white");
+      } else {
+        btn.classList.remove("bg-primary","text-white");
+        btn.classList.add("bg-zinc-100","text-zinc-700","hover:bg-zinc-200");
+      }
+    });
+  }
+
+  // Load products from JSON and render table
+  const LIVE_CATEGORY = "Ochrana dýchacích orgánov";
+
+  function renderProducts(products) {
+    const filtered = products.filter(p => p.category === LIVE_CATEGORY);
+    document.getElementById("product-count").textContent = filtered.length + " produktov";
+    const tbody = document.getElementById("product-tbody");
+    tbody.innerHTML = filtered.map(p => {
+      const priceStr = (p.priceNote ? p.priceNote + " " : "") + p.price.toFixed(2).replace(".", ",") + " €";
+      const imgHtml = p.img
+        ? `<img src="${p.img}" alt="" class="w-12 h-12 object-contain rounded border border-zinc-100 shrink-0"/>`
+        : `<div class="w-12 h-12 bg-zinc-100 rounded flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-zinc-300 text-xl">image_not_supported</span></div>`;
+      const isLink = !!p.url;
+      const rowClass = isLink
+        ? "border-b border-zinc-100 hover:bg-red-50 transition-colors cursor-pointer"
+        : "border-b border-zinc-100 hover:bg-zinc-50 transition-colors";
+      const onclick = isLink ? `onclick="location.href='${p.url}'"` : "";
+      const nameHtml = isLink
+        ? `<a href="${p.url}" class="text-sm text-zinc-800 hover:text-primary font-medium">${p.shortName}</a>`
+        : `<span class="text-sm text-zinc-800">${p.shortName}</span>`;
+      const arrow = isLink
+        ? `<span class="material-symbols-outlined text-primary text-base">arrow_forward</span>`
+        : "";
+      return `
+        <tr class="${rowClass}" ${onclick}>
+          <td class="py-3 pr-4">
+            <div class="flex items-center gap-4">${imgHtml}${nameHtml}</div>
+          </td>
+          <td class="py-3 text-sm font-bold text-zinc-900 whitespace-nowrap text-right">
+            <div class="flex items-center justify-end gap-2">${priceStr}${arrow}</div>
+          </td>
+        </tr>`;
+    }).join("");
+  }
+
+  fetch("produkty.json")
+    .then(r => r.json())
+    .then(renderProducts)
+    .catch(() => {
+      document.getElementById("product-tbody").innerHTML =
+        `<tr><td colspan="2" class="py-8 text-center text-zinc-400 text-sm">Nepodarilo sa načítať produkty.</td></tr>`;
+    });
+</script>
+
+</body>
+</html>
