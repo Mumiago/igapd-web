@@ -345,7 +345,7 @@
         const defaultIdx = Math.floor(p.variants.length / 2);
         updateVariant(p.variants[defaultIdx]);
         document.getElementById("product-title").textContent =
-          p.name.replace("séria", p.variants[defaultIdx].sku);
+          p.name.replace("séria", sku);
       } else {
         document.getElementById("variants-section").classList.add("hidden");
         document.getElementById("product-title").textContent = p.name;
